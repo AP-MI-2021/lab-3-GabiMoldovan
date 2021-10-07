@@ -1,17 +1,32 @@
 import math
 
 def perfect_square(nr: int):
+    '''
+    Determina daca nr este patrat perfect
+    :param nr: nr natyral
+    :return: True daca nr este patrat perfect, altfel False
+    '''
     if int(math.sqrt(nr)) == float(math.sqrt(nr)):
         return True
     return False
 
 def verify_all_are_perfect_squares(lst: list[int]) -> bool:
+    '''
+    Parcurge toate numerele din lst si verifica prin functia perfect_square daca sunt patrate perfecte
+    :param lst: o  lista de numere
+    :return: True daca toate sunt patrate perfecte, altfel False
+    '''
     for nr in lst:
         if perfect_square(int(nr)) == False:
             return False
     return True
 
 def get_longest_all_perfect_squares(lst: list[int]) -> list[int]:
+    '''
+    Determina cea mai lunga subsecventa de patrate perfecte
+    :param lst: o lista de numere
+    :return: Cea mai lunga subsecventa de patrate perfecte
+    '''
     result = []
     for i in range(len(lst)):
         for j in range(i, len(lst)):
@@ -20,6 +35,11 @@ def get_longest_all_perfect_squares(lst: list[int]) -> list[int]:
     return result
 
 def bit_counts(x: int):
+    '''
+    Determina numarul de biti de 1 din reprezentarea binara a lui x
+    :param x: nr natural
+    :return: Numarul de biti de 1 din reprezentarea binara a lui x
+    '''
     bits = int(0)
     while x:
         if x % 2 == 1:
@@ -28,6 +48,11 @@ def bit_counts(x: int):
     return bits
 
 def verify_all_same_bit_counts(lst: list[int]) -> bool:
+    '''
+    Verifica daca toate numerele din lst au acelasi numar de biti de 1 folosind functia bit_counts
+    :param lst: o lista de numere
+    :return: True daca toate numerele au acelasi numar de biti de 1 in reprezentarea binara, altfel False
+    '''
     bits = bit_counts(lst[0])
     for i in range(1, len(lst)):
         if bit_counts(lst[i]) != bits:
@@ -35,6 +60,11 @@ def verify_all_same_bit_counts(lst: list[int]) -> bool:
     return True
 
 def get_longest_same_bit_counts(lst: list[int]) -> list[int]:
+    '''
+    Determina cea mai lunga subsecventa de numere care au acelasi numar de biti de 1 in reprezentarea binara
+    :param lst: O lista de numere
+    :return: Cea mai lunga subsecventa de numere care au acelasi numar de biti de 1 in reprezentarea binara
+    '''
     result = []
     for i in range(len(lst)):
         for j in range(i, len(lst)):
