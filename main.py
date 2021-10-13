@@ -72,6 +72,37 @@ def get_longest_same_bit_counts(lst: list[int]) -> list[int]:
                 result = lst[i:j + 1]
     return result
 
+def is_prime(n) -> bool:
+    '''
+    Determina primalitatea lui n
+    :param n: nr natural
+    :return: True daca n este prim, altfel False
+    '''
+    if int(n) < 2:
+        return False
+    for i in range(2, int(n) // 2 + 1):
+        if int(n) % int(i) == 0: return False
+    return True
+
+def verify_all_are_prime(lst: list[int]) -> bool:
+    for nr in lst:
+        if is_prime(nr) == False:
+            return False
+    return True
+
+def get_longest_all_primes(lst: list[int]) -> list[int]:
+    '''
+    Determina cea mai lunga subsecventa de numere prime dintr-o lista de numere
+    :param lst: O lista de numere
+    :return: Cea mai lunga subsecventa de numere prime
+    '''
+    result = []
+    for i in range(len(lst)):
+        for j in range(i, len(lst)):
+            if verify_all_are_prime(lst[i:j + 1]) and len(lst[i:j + 1]) > len(result):
+                result = lst[i:j + 1]
+    return result
+
 def test_get_longest_all_perfect_squares():
     assert get_longest_all_perfect_squares([1,2,3,4,5]) == [1]
     assert get_longest_all_perfect_squares([1,4,9,3,7,4,9,16,25]) == [4,9,16,25]
@@ -82,13 +113,19 @@ def test_get_longest_same_bit_counts():
     assert get_longest_same_bit_counts([35, 85, 69, 36, 85, 85, 45]) == [85, 85, 45]
     assert get_longest_same_bit_counts([]) == []
 
+def test_get_longest_all_primes():
+    assert get_longest_all_primes([1,2,3,4,5]) == [2,3]
+    assert get_longest_all_primes([1,6,2,3,5,7,11]) == [2,3,5,7,11]
+    assert get_longest_all_primes([6,9,10,7,6,49,56]) == [7]
+
 def main():
     while True:
         print("Optiuni:")
         print("1. Citeste o lista de numere de la tastatura")
         print("2. Determina cea mai lunga subsecventa cu toate elementele patrate perfecte")
         print("3. Determina cea mai lunga subsecventa cu toate elementele care au acelasi numar de biti 1 in reprezentarea binara")
-        print("4. Termina programul")
+        print("4. Determina cea mai lunga subsecventa cu toate elementele numere prime")
+        print("5. Termina programul")
         option = input("Scrie numarul aferent optiunii: ")
 
         if option == "1":
@@ -105,6 +142,10 @@ def main():
             print(get_longest_same_bit_counts(lst))
 
         if option == "4":
+            print("Cea mai lunga subsecventa in care toate elementele sunt numere prime este:", end = " ")
+            print(get_longest_all_primes(lst))
+
+        if option == "5":
             break
         print()
 
