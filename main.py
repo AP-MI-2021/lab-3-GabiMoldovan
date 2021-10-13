@@ -85,6 +85,11 @@ def is_prime(n) -> bool:
     return True
 
 def verify_all_are_prime(lst: list[int]) -> bool:
+    '''
+    Determina daca toate numerele dintr-o lista sunt prime
+    :param lst: o lista de numere
+    :return: True daca toate sunt prime, False altfel
+    '''
     for nr in lst:
         if is_prime(nr) == False:
             return False
